@@ -9,6 +9,7 @@ import { SampleTag } from "@/components/ui/Section";
 import { promptExamples, shipments } from "@/lib/data";
 import { easeEnter } from "@/lib/motion";
 import { useAccess } from "@/components/access/AccessContext";
+import { withBase } from "@/lib/paths";
 
 const query = promptExamples[0];
 const answer =
@@ -57,7 +58,7 @@ export function Intelligence() {
     <Section className="py-24 md:py-32">
       <div className="relative overflow-hidden rounded-[24px] border border-line bg-bg-2 px-5 py-14 md:px-12 md:py-20">
         <img
-          src="/media/horizon.jpg"
+          src={withBase("/media/horizon.jpg")}
           alt=""
           className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-screen"
         />

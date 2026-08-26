@@ -8,6 +8,7 @@ import { SampleTag } from "@/components/ui/Section";
 import { featuredShipment, heroEvents, heroTimeline } from "@/lib/data";
 import { easeEnter } from "@/lib/motion";
 import { cn } from "@/lib/cn";
+import { withBase } from "@/lib/paths";
 
 export function CommandCenter() {
   const reduce = useReducedMotion();
@@ -50,7 +51,7 @@ export function CommandCenter() {
       transition={{ duration: 0.8, delay: 0.25, ease: easeEnter }}
     >
       <img
-        src="/media/horizon.jpg"
+        src={withBase("/media/horizon.jpg")}
         alt=""
         className="absolute inset-0 h-full w-full object-cover opacity-35 mix-blend-screen"
       />

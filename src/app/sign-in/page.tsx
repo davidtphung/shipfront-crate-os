@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { withBase } from "@/lib/paths";
 
 export const metadata = {
   title: "Sign in - Shipfront",
@@ -13,7 +14,7 @@ export default function SignInPage() {
         Workspace sign-in is not live in this preview. Request access to get a
         Crate workspace.
       </p>
-      <form className="mt-8 grid gap-4" action="/request-access">
+      <form className="mt-8 grid gap-4" action={withBase("/request-access")}>
         <label className="grid gap-2 text-sm">
           <span className="text-ink-2">Work email</span>
           <input
