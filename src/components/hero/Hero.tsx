@@ -21,7 +21,10 @@ export function Hero() {
         };
 
   return (
-    <section className="relative min-h-[100dvh] overflow-hidden pt-20">
+    <section
+      aria-labelledby="hero-heading"
+      className="relative min-h-[100dvh] overflow-hidden pt-20"
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(184,202,225,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(184,202,225,0.04)_1px,transparent_1px)] bg-[size:80px_80px]" />
         <motion.div
@@ -38,7 +41,10 @@ export function Hero() {
           <p className="text-[12px] font-medium uppercase tracking-[0.22em] text-cyan">
             The Crate / Freight operating system
           </p>
-          <h1 className="mt-5 text-[40px] font-medium leading-[1.05] tracking-[-0.045em] text-ink sm:text-[52px] lg:text-[64px] xl:text-[72px]">
+          <h1
+            id="hero-heading"
+            className="mt-5 text-[40px] font-medium leading-[1.05] tracking-[-0.045em] text-ink sm:text-[52px] lg:text-[64px] xl:text-[72px]"
+          >
             <span className="block overflow-hidden">
               <motion.span className="block sm:whitespace-nowrap" {...line(0.12)}>
                 Know where every
@@ -68,7 +74,7 @@ export function Hero() {
             <Button onClick={show}>Request access</Button>
             <Button href="#product" variant="ghost">
               Explore the platform
-              <ArrowRight size={16} />
+              <ArrowRight size={16} aria-hidden />
             </Button>
           </motion.div>
         </div>

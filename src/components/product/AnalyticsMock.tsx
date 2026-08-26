@@ -50,10 +50,13 @@ export function AnalyticsMock() {
           {Object.keys(ranges).map((key) => (
             <button
               key={key}
+              type="button"
+              aria-pressed={range === key}
+              aria-label={`Show ${key} sample range`}
               onClick={() => setRange(key as keyof typeof ranges)}
               className={cn(
-                "rounded-[8px] px-2 py-1 font-mono text-[11px]",
-                range === key ? "bg-white/[0.06] text-ink" : "text-ink-3",
+                "min-h-10 rounded-[8px] px-2 font-mono text-[11px]",
+                range === key ? "bg-white/[0.06] text-ink" : "text-ink-3 hover:text-ink",
               )}
             >
               {key}
@@ -77,8 +80,15 @@ export function AnalyticsMock() {
       </div>
       <div className="grid gap-4 px-4 pb-4 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="rounded-[16px] border border-line bg-bg p-4">
-          <p className="text-[12px] text-ink-3">Reliability trend</p>
-          <svg viewBox="0 0 260 80" className="mt-3 h-24 w-full" aria-hidden>
+          <p className="text-[12px] text-ink-3" id="reliability-chart-label">
+            Reliability trend
+          </p>
+          <svg
+            viewBox="0 0 260 80"
+            className="mt-3 h-24 w-full"
+            role="img"
+            aria-labelledby="reliability-chart-label reliability-chart-value"
+          >
             <motion.path
               d={path}
               fill="none"
@@ -98,16 +108,30 @@ export function AnalyticsMock() {
                   cy={y}
                   r={hover === i ? 4 : 2.5}
                   fill="#53D9FF"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Point ${i + 1}: ${v}% on-time`}
                   onMouseEnter={() => setHover(i)}
                   onMouseLeave={() => setHover(null)}
+                  onFocus={() => setHover(i)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setHover(i);
+                    }
+                  }}
                 />
               );
             })}
           </svg>
           {hover !== null ? (
-            <p className="font-mono text-[12px] text-cyan">{line[hover]}% on-time</p>
+            <p id="reliability-chart-value" className="font-mono text-[12px] text-cyan" aria-live="polite">
+              {line[hover]}% on-time
+            </p>
           ) : (
-            <p className="text-[12px] text-ink-3">Hover a point for the exact value.</p>
+            <p id="reliability-chart-value" className="text-[12px] text-ink-3">
+              Select a point for the exact value.
+            </p>
           )}
         </div>
         <div className="rounded-[16px] border border-line bg-bg p-4">
@@ -125,6 +149,10 @@ export function AnalyticsMock() {
                   transition={{ duration: 0.5, ease: easeEnter }}
                 />
                 <span className="text-[10px] text-ink-3">
+                  <span className="sr-only">
+                    {["Los Angeles / Long Beach", "Shanghai", "Rotterdam", "Singapore"][i]} dwell{" "}
+                    {v} days
+                  </span>
                   {["LA/LB", "SHA", "RTM", "SIN"][i]}
                 </span>
               </div>

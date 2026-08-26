@@ -12,7 +12,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn("relative scroll-mt-24 px-5 md:px-8 lg:px-12", className)}
+      className={cn("relative scroll-mt-28 px-5 md:px-8 lg:px-12", className)}
     >
       <div className="mx-auto w-full max-w-[1440px]">{children}</div>
     </section>

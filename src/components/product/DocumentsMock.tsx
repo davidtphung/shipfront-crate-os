@@ -33,7 +33,7 @@ export function DocumentsMock() {
                 i < stage ? "border-ok/30 bg-ok/5" : "border-line bg-bg",
               )}
             >
-              <FileText size={18} className="text-ink-2" />
+              <FileText size={18} className="text-ink-2" aria-hidden />
               <div className="flex-1">
                 <p className="text-[13px]">{item}</p>
                 <p className="font-mono text-[11px] text-ink-3">
@@ -41,9 +41,9 @@ export function DocumentsMock() {
                 </p>
               </div>
               {i < stage ? (
-                <CheckCircle size={18} className="text-ok" />
+                <CheckCircle size={18} className="text-ok" aria-hidden />
               ) : (
-                <CircleDashed size={18} className="text-ink-3" />
+                <CircleDashed size={18} className="text-ink-3" aria-hidden />
               )}
             </motion.div>
           ))}
@@ -58,7 +58,7 @@ export function DocumentsMock() {
                 : "Shipper: Harborline\nConsignee: Northline DC\nContainer: SFLZ 441829 0\nSeal: 991204"}
           </div>
           <div className="mt-4 flex items-center justify-between">
-            <p className="text-[12px] text-ink-2">
+            <p className="text-[12px] text-ink-2" aria-live="polite">
               Missing {Math.max(0, 3 - stage)} of 3
             </p>
             <Button

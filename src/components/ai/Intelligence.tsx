@@ -60,6 +60,9 @@ export function Intelligence() {
         <img
           src={withBase("/media/horizon.jpg")}
           alt=""
+          width={1600}
+          height={900}
+          loading="lazy"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-screen"
         />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(91,124,255,0.16),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(83,217,255,0.1),transparent_42%)]" />

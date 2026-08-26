@@ -54,7 +54,10 @@ export function Logo({
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark className={cn("h-7 w-7", markClassName)} />
-      <span className="text-[13px] font-semibold tracking-[0.18em] text-ink">
+      <span
+        className="text-[13px] font-semibold tracking-[0.18em] text-ink"
+        translate="no"
+      >
         SHIPFRONT
       </span>
     </span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { List, X } from "@phosphor-icons/react";
@@ -8,8 +8,19 @@ import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { useAccess } from "@/components/access/AccessContext";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { navItems } from "@/lib/data";
 import { cn } from "@/lib/cn";
+
+const spyIds = [
+  "product",
+  "why",
+  "network",
+  "developers",
+  "pricing",
+  "resources",
+] as const;
 
 export function SiteNav() {
   const { scrollY } = useScroll();
@@ -18,13 +29,25 @@ export function SiteNav() {
   const { show } = useAccess();
   const pathname = usePathname();
   const home = pathname === "/";
+  const active = useScrollSpy(spyIds);
+  const menuRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(open, menuRef);
 
   useMotionValueEvent(scrollY, "change", (v) => {
     setScrolled(v > 18);
   });
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5">
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-[max(0.75rem,env(safe-area-inset-top))] md:px-5">
       <motion.nav
         aria-label="Primary"
         className={cn(
@@ -34,28 +57,47 @@ export function SiteNav() {
             : "rounded-[16px] border border-transparent bg-transparent",
         )}
       >
-        <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
+        <Link
+          href="/"
+          className="shrink-0 rounded-[10px]"
+          aria-label="Shipfront home"
+          onClick={() => setOpen(false)}
+        >
           <Logo />
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a
-                href={home ? item.href : `/${item.href}`}
-                className="group relative rounded-[10px] px-2.5 py-1.5 text-[13px] text-ink-2 transition-colors hover:text-ink"
-              >
-                {item.label}
-                <span className="absolute inset-x-2.5 -bottom-0.5 h-px origin-left scale-x-0 bg-cyan transition-transform duration-200 group-hover:scale-x-100" />
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const id = item.href.replace("#", "");
+            const current = home && active === id;
+            return (
+              <li key={item.href}>
+                <a
+                  href={home ? item.href : `/${item.href}`}
+                  aria-current={current ? "location" : undefined}
+                  className={cn(
+                    "group relative inline-flex min-h-10 items-center rounded-[10px] px-2.5 text-[13px] transition-colors",
+                    current ? "text-ink" : "text-ink-2 hover:text-ink",
+                  )}
+                >
+                  {item.label}
+                  <span
+                    className={cn(
+                      "absolute inset-x-2.5 -bottom-0.5 h-px origin-left bg-cyan transition-transform duration-200",
+                      current ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100",
+                    )}
+                  />
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hidden items-center gap-2 lg:flex">
           <Link
             href="/sign-in"
-            className="px-3 py-1.5 text-[13px] text-ink-2 transition-colors hover:text-ink"
+            aria-current={pathname === "/sign-in" ? "page" : undefined}
+            className="inline-flex min-h-10 items-center px-3 text-[13px] text-ink-2 transition-colors hover:text-ink"
           >
             Sign in
           </Link>
@@ -65,23 +107,31 @@ export function SiteNav() {
         </div>
 
         <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-[10px] border border-line text-ink lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-[10px] border border-line text-ink lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X size={18} /> : <List size={18} />}
+          {open ? <X size={18} aria-hidden /> : <List size={18} aria-hidden />}
         </button>
       </motion.nav>
 
       {open ? (
-        <div className="pointer-events-auto mx-auto mt-2 max-w-[1440px] rounded-[20px] border border-line bg-bg-2/95 p-4 shadow-[0_16px_40px_rgba(0,0,0,0.4)] backdrop-blur-xl lg:hidden">
+        <div
+          ref={menuRef}
+          id="mobile-nav"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site menu"
+          className="pointer-events-auto mx-auto mt-2 max-w-[1440px] overflow-y-auto overscroll-contain rounded-[20px] border border-line bg-bg-2/95 p-4 shadow-[0_16px_40px_rgba(0,0,0,0.4)] backdrop-blur-xl lg:hidden"
+        >
           <ul className="grid gap-1">
             {navItems.map((item) => (
               <li key={item.href}>
                 <a
                   href={home ? item.href : `/${item.href}`}
-                  className="block rounded-[12px] px-3 py-2.5 text-[15px] text-ink-2 hover:bg-white/[0.04] hover:text-ink"
+                  className="flex min-h-11 items-center rounded-[12px] px-3 text-[15px] text-ink-2 hover:bg-white/[0.04] hover:text-ink"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}

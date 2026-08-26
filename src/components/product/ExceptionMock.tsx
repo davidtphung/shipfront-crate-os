@@ -42,13 +42,34 @@ export function ExceptionMock() {
         <p className="text-[13px]">Exception intelligence</p>
         <SampleTag />
       </div>
-      <div className="relative flex gap-1 px-4 pt-3">
+      <div
+        role="tablist"
+        aria-label="Exception queues"
+        className="relative flex gap-1 px-4 pt-3"
+        onKeyDown={(event) => {
+          const index = tabs.indexOf(tab);
+          if (event.key === "ArrowRight") {
+            event.preventDefault();
+            setTab(tabs[(index + 1) % tabs.length]);
+          }
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            setTab(tabs[(index - 1 + tabs.length) % tabs.length]);
+          }
+        }}
+      >
         {tabs.map((item) => (
           <button
             key={item}
+            type="button"
+            role="tab"
+            id={`exception-tab-${item}`}
+            aria-selected={tab === item}
+            aria-controls={`exception-panel-${item}`}
+            tabIndex={tab === item ? 0 : -1}
             onClick={() => setTab(item)}
             className={cn(
-              "relative px-3 py-1.5 text-[13px]",
+              "relative min-h-10 px-3 text-[13px]",
               tab === item ? "text-ink" : "text-ink-3 hover:text-ink",
             )}
           >
@@ -62,7 +83,12 @@ export function ExceptionMock() {
           </button>
         ))}
       </div>
-      <div className="p-4">
+      <div
+        className="p-4"
+        role="tabpanel"
+        id={`exception-panel-${tab}`}
+        aria-labelledby={`exception-tab-${tab}`}
+      >
         {tab === "Resolved" ? (
           <p className="text-[14px] text-ink-2">
             Sample resolved queue is empty in this preview.
@@ -85,18 +111,24 @@ export function ExceptionMock() {
                 Risk {risk}
               </span>
             </div>
-            <p className="mt-3 min-h-[4.5rem] text-[13px] leading-relaxed text-ink-2">
+            <p
+              className="mt-3 min-h-[4.5rem] text-[13px] leading-relaxed text-ink-2"
+              aria-live="polite"
+            >
               {typed}
-              <span className="text-cyan">{typed.length < assessment.length ? "▎" : ""}</span>
+              <span className="text-cyan" aria-hidden>
+                {typed.length < assessment.length ? "▎" : ""}
+              </span>
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {["Notify consignee", "Reroute", "Reserve linehaul"].map((action) => (
-                <span
+                <button
                   key={action}
-                  className="rounded-full border border-line px-3 py-1 text-[12px] text-ink-2"
+                  type="button"
+                  className="min-h-10 rounded-full border border-line px-3 text-[12px] text-ink-2 hover:text-ink"
                 >
                   {action}
-                </span>
+                </button>
               ))}
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-2">

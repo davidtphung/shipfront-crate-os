@@ -36,6 +36,7 @@ export function CommandCenter() {
   return (
     <motion.div
       className="panel relative h-[520px] overflow-hidden lg:h-[560px]"
+      aria-label="Crate command center sample"
       onMouseMove={(e) => {
         if (reduce) return;
         const r = e.currentTarget.getBoundingClientRect();
@@ -53,6 +54,9 @@ export function CommandCenter() {
       <img
         src={withBase("/media/horizon.jpg")}
         alt=""
+        width={1200}
+        height={620}
+        fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover opacity-35 mix-blend-screen"
       />
       <div className="absolute inset-0 bg-gradient-to-br from-bg/40 via-bg-2/20 to-transparent" />

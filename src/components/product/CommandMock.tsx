@@ -90,18 +90,26 @@ export function CommandMock() {
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
           <div>
             <p className="text-[12px] text-ink-3">Command Center</p>
-            <p className="font-mono text-[13px] text-ink">{selected.id}</p>
+            <p className="font-mono text-[13px] text-ink" translate="no">
+              {selected.id}
+            </p>
           </div>
           <SampleTag />
         </div>
         <div className="grid lg:grid-cols-[220px_minmax(0,1fr)]">
-          <ul className="border-b border-line p-2 lg:border-b-0 lg:border-r">
+          <ul
+            className="border-b border-line p-2 lg:border-b-0 lg:border-r"
+            aria-label="Sample shipments"
+          >
             {shipments.map((item) => (
               <li key={item.id}>
                 <button
+                  type="button"
+                  aria-current={item.id === id ? "true" : undefined}
+                  aria-label={`${item.id}, ${item.route}, ${item.risk} risk`}
                   onClick={() => setId(item.id)}
                   className={cn(
-                    "flex w-full items-start gap-2 rounded-[12px] px-2.5 py-2 text-left transition-colors",
+                    "flex min-h-11 w-full items-start gap-2 rounded-[12px] px-2.5 py-2 text-left transition-colors",
                     item.id === id
                       ? "bg-white/[0.05] ring-1 ring-line-strong"
                       : "hover:bg-white/[0.03]",

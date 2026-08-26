@@ -15,26 +15,34 @@ export default function SignInPage() {
         Crate workspace.
       </p>
       <form className="mt-8 grid gap-4" action={withBase("/request-access")}>
-        <label className="grid gap-2 text-sm">
-          <span className="text-ink-2">Work email</span>
+        <div className="grid gap-2 text-sm">
+          <label htmlFor="signin-email" className="text-ink-2">
+            Work email
+          </label>
           <input
+            id="signin-email"
             type="email"
             name="email"
+            inputMode="email"
             autoComplete="email"
+            spellCheck={false}
             required
             className="h-11 rounded-[12px] border border-line bg-bg-2 px-3 text-[15px]"
           />
-        </label>
-        <label className="grid gap-2 text-sm">
-          <span className="text-ink-2">Password</span>
+        </div>
+        <div className="grid gap-2 text-sm">
+          <label htmlFor="signin-password" className="text-ink-2">
+            Password
+          </label>
           <input
+            id="signin-password"
             type="password"
             name="password"
             autoComplete="current-password"
             required
             className="h-11 rounded-[12px] border border-line bg-bg-2 px-3 text-[15px]"
           />
-        </label>
+        </div>
         <Button type="submit" variant="ghost" className="w-full">
           Continue
         </Button>

@@ -42,7 +42,7 @@ export function Button({
   disabled,
 }: Props) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 font-medium whitespace-nowrap transition-[transform,box-shadow,background-color,border-color,filter] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none",
+    "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 font-medium whitespace-nowrap transition-[transform,box-shadow,background-color,border-color,filter] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-cyan",
     variants[variant],
     sizes[size],
     className,

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { SiteFooter } from "@/components/footer/SiteFooter";
@@ -20,15 +20,22 @@ export const metadata: Metadata = {
     "The freight operating system. Bookings, carriers, documents, exceptions, and live tracking in one workspace.",
 };
 
+export const viewport: Viewport = {
+  themeColor: "#07090D",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-bg font-sans text-ink">
+      <body className="min-h-full bg-bg pb-[env(safe-area-inset-bottom)] font-sans text-ink">
         <Providers>
-          <main id="main">{children}</main>
+          <main id="main" tabIndex={-1} className="outline-none">
+            {children}
+          </main>
           <SiteFooter />
         </Providers>
       </body>

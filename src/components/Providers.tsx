@@ -1,22 +1,34 @@
 "use client";
 
-import { AccessProvider } from "@/components/access/AccessContext";
+import { AccessProvider, useAccess } from "@/components/access/AccessContext";
 import { AccessDialog } from "@/components/access/AccessDialog";
 import { SiteNav } from "@/components/nav/SiteNav";
+
+function Shell({ children }: { children: React.ReactNode }) {
+  const { open } = useAccess();
+
+  return (
+    <>
+      <a
+        href="#main"
+        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-4 focus-visible:top-4 focus-visible:z-[90] focus-visible:rounded-[10px] focus-visible:bg-ink focus-visible:px-3 focus-visible:py-2 focus-visible:text-bg"
+      >
+        Skip to content
+      </a>
+      <div inert={open || undefined}>
+        <div className="noise" aria-hidden />
+        <SiteNav />
+        {children}
+      </div>
+      <AccessDialog />
+    </>
+  );
+}
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <AccessProvider>
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[90] focus:rounded-[10px] focus:bg-ink focus:px-3 focus:py-2 focus:text-bg"
-      >
-        Skip to content
-      </a>
-      <div className="noise" aria-hidden />
-      <SiteNav />
-      {children}
-      <AccessDialog />
+      <Shell>{children}</Shell>
     </AccessProvider>
   );
 }

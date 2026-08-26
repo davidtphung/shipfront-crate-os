@@ -7,7 +7,7 @@
   --bg-elevated: #151d2b;
   --text-primary: #f5f7fa;
   --text-secondary: #aab4c3;
-  --text-muted: #707d90;
+  --text-muted: #8b97a8;
   --blue: #5b7cff;
   --cyan: #53d9ff;
   --violet: #a88bff;
@@ -44,6 +44,7 @@
 html {
   background: var(--bg-primary);
   color: var(--text-primary);
+  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
@@ -53,6 +54,33 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   min-height: 100dvh;
   overflow-x: clip;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--blue) 22%, transparent);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+input,
+select,
+textarea {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  color-scheme: dark;
+}
+
+button,
+a,
+[role="button"],
+[role="tab"] {
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
@@ -61,8 +89,17 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--blue);
+  outline: 2px solid var(--cyan);
   outline-offset: 3px;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .backdrop-blur-xl,
+  .backdrop-blur-md,
+  .backdrop-blur-sm {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 .font-mono {

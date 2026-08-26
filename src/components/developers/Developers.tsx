@@ -40,14 +40,17 @@ export function Developers() {
           <div className="flex items-center justify-between border-b border-line px-4 py-2.5">
             <p className="font-mono text-[12px] text-ink-3">shipment.ts</p>
             <button
-              className="inline-flex items-center gap-1.5 text-[12px] text-ink-2 hover:text-ink"
+              type="button"
+              className="inline-flex min-h-10 items-center gap-1.5 px-1 text-[12px] text-ink-2 hover:text-ink"
+              aria-live="polite"
+              aria-label={copied ? "Snippet copied" : "Copy snippet"}
               onClick={async () => {
                 await navigator.clipboard.writeText(snippet);
                 setCopied(true);
                 window.setTimeout(() => setCopied(false), 1600);
               }}
             >
-              {copied ? <Check size={14} /> : <Copy size={14} />}
+              {copied ? <Check size={14} aria-hidden /> : <Copy size={14} aria-hidden />}
               {copied ? "Copied" : "Copy"}
             </button>
           </div>
