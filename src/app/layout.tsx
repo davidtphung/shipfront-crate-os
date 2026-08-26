@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/Providers";
-import { SiteFooter } from "@/components/footer/SiteFooter";
+import { Footer } from "@/components/shipfront/Footer";
+import { site, hero } from "@/data/site-copy";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,28 +16,42 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shipfront - The Crate",
-  description:
-    "The freight operating system. Bookings, carriers, documents, exceptions, and live tracking in one workspace.",
+  title: {
+    default: "Shipfront",
+    template: "%s — Shipfront",
+  },
+  description: hero.body,
+  metadataBase: new URL(site.url),
+  openGraph: {
+    title: "Shipfront",
+    description: hero.body,
+    url: site.url,
+    siteName: "Shipfront",
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07090D",
-  colorScheme: "dark",
+  themeColor: "#F7F8F4",
+  colorScheme: "light",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-bg pb-[env(safe-area-inset-bottom)] font-sans text-ink">
+      <body className="min-h-full bg-canvas pb-[env(safe-area-inset-bottom)] font-sans text-ink">
         <Providers>
           <main id="main" tabIndex={-1} className="outline-none">
             {children}
           </main>
-          <SiteFooter />
+          <Footer />
         </Providers>
       </body>
     </html>

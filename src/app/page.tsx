@@ -1,25 +1,27 @@
-import { Hero } from "@/components/hero/Hero";
-import { TrustStrip } from "@/components/trust/TrustStrip";
-import { WhySection } from "@/components/why/WhySection";
-import { Capabilities } from "@/components/product/Capabilities";
-import { Intelligence } from "@/components/ai/Intelligence";
-import { HowItWorks } from "@/components/journey/HowItWorks";
-import { Developers } from "@/components/developers/Developers";
-import { Pricing } from "@/components/pricing/Pricing";
-import { FinalCta } from "@/components/cta/FinalCta";
+import { Hero } from "@/components/shipfront/Hero";
+import { NetworkExperience } from "@/components/shipfront/NetworkExperience";
+import { ServiceModules } from "@/components/shipfront/ServiceModules";
+import { ProcessJourney } from "@/components/shipfront/ProcessJourney";
+import { CustomerSuccess } from "@/components/shipfront/CustomerSuccess";
+import { ContactCTA } from "@/components/shipfront/ContactCTA";
+import { capabilityList } from "@/data/site-copy";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustStrip />
-      <WhySection />
-      <Capabilities />
-      <Intelligence />
-      <HowItWorks />
-      <Developers />
-      <Pricing />
-      <FinalCta />
+      <section aria-label="Capabilities" className="border-y border-line bg-paper">
+        <ul className="mx-auto flex max-w-[1440px] flex-wrap gap-x-6 gap-y-2 px-5 py-5 text-[13px] font-medium tracking-[0.04em] text-ink-2 sm:px-8">
+          {capabilityList.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+      <NetworkExperience />
+      <ServiceModules />
+      <ProcessJourney />
+      <CustomerSuccess />
+      <ContactCTA />
     </>
   );
 }

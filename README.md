@@ -1,6 +1,6 @@
-# Shipfront - The Crate
+# Shipfront
 
-Marketing site and interactive product canvas for Shipfront, a freight operating system.
+Warehousing and fulfillment for eCommerce merchants. Public marketing site rebuilt from the live copy at [myshipfront.com](https://www.myshipfront.com/).
 
 ```bash
 npm install
@@ -14,11 +14,22 @@ Open [http://localhost:3000](http://localhost:3000).
 - Next.js (App Router) and TypeScript
 - Tailwind CSS v4 with CSS design tokens
 - Motion for UI choreography
-- GSAP ScrollTrigger for the booking-to-delivery journey
 - Phosphor icons
 
-## Notes
+## Pages
 
-Product interfaces use labeled sample workspace data. They are not live operational metrics.
+- `/` Why Shipfront
+- `/how-it-works` How it Works
+- `/get-a-quote` Get a Quote
+- `/about` About
+- `/contact` Contact
+- `/partners` Partners
+- `/pricing` Quotes (no public price list on the source site)
 
-Motion specs live in `docs/MOTION.md`.
+## GitHub Pages
+
+```bash
+GITHUB_PAGES=true NEXT_PUBLIC_BASE_PATH=/shipfront-crate-os npm run build
+```
+
+The static export is written to `out/`.

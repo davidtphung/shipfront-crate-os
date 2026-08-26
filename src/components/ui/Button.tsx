@@ -1,70 +1,62 @@
-"use client";
-
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { withBase } from "@/lib/paths";
 
-type Variant = "primary" | "ghost" | "subtle";
-type Size = "md" | "sm";
+type Variant = "primary" | "secondary" | "ghost" | "night";
 
-const variants: Record<Variant, string> = {
+const styles: Record<Variant, string> = {
   primary:
-    "bg-ink text-bg hover:brightness-110 hover:-translate-y-px shadow-[0_8px_24px_rgba(245,247,250,0.08)] hover:shadow-[0_10px_28px_rgba(91,124,255,0.22)]",
-  ghost:
-    "bg-transparent text-ink border border-line hover:border-line-strong hover:bg-white/[0.03] hover:-translate-y-px",
-  subtle:
-    "bg-elevated text-ink border border-line hover:border-line-strong hover:bg-white/[0.04]",
-};
-
-const sizes: Record<Size, string> = {
-  md: "h-11 px-5 text-[15px] rounded-[12px]",
-  sm: "h-9 px-3.5 text-[13px] rounded-[10px]",
-};
-
-type Props = {
-  children: React.ReactNode;
-  variant?: Variant;
-  size?: Size;
-  href?: string;
-  onClick?: () => void;
-  className?: string;
-  type?: "button" | "submit";
-  disabled?: boolean;
+    "bg-accent text-white shadow-[0_8px_24px_rgba(35,104,246,0.22)] hover:bg-accent-dark",
+  secondary:
+    "border border-line bg-paper text-ink hover:border-ink/25 hover:bg-surface",
+  ghost: "text-ink hover:bg-surface",
+  night:
+    "bg-paper text-ink hover:bg-night-text",
 };
 
 export function Button({
+  href,
   children,
   variant = "primary",
-  size = "md",
-  href,
-  onClick,
   className,
   type = "button",
+  onClick,
   disabled,
-}: Props) {
-  const classes = cn(
-    "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 font-medium whitespace-nowrap transition-[transform,box-shadow,background-color,border-color,filter] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-cyan",
-    variants[variant],
-    sizes[size],
+}: {
+  href?: string;
+  children: React.ReactNode;
+  variant?: Variant;
+  className?: string;
+  type?: "button" | "submit";
+  onClick?: () => void;
+  disabled?: boolean;
+}) {
+  const cls = cn(
+    "inline-flex min-h-11 items-center justify-center gap-2 rounded-[12px] px-5 text-[15px] font-medium tracking-[-0.01em] whitespace-nowrap transition-colors duration-[var(--motion-ui)] ease-[var(--ease-out-expo)] active:scale-[0.98]",
+    "disabled:pointer-events-none disabled:opacity-50",
+    styles[variant],
     className,
   );
 
   if (href) {
-    if (href.startsWith("#")) {
+    const isHash = href.startsWith("#");
+    const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+    if (isHash || isExternal) {
       return (
-        <a href={href} className={classes} onClick={onClick}>
+        <a href={href} className={cls}>
           {children}
         </a>
       );
     }
     return (
-      <Link href={href} className={classes} onClick={onClick}>
+      <Link href={withBase(href)} className={cls}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes} disabled={disabled}>
+    <button type={type} className={cls} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );
