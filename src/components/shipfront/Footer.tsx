@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { footerLinks } from "@/data/navigation";
 import { site } from "@/data/site-copy";
-import { withBase } from "@/lib/paths";
 
 export function Footer() {
   return (
@@ -26,7 +25,7 @@ export function Footer() {
             {footerLinks.map((link) => (
               <li key={link.href}>
                 <Link
-                  href={withBase(link.href)}
+                  href={link.href}
                   className="text-[15px] text-night-text/90 hover:text-night-text"
                 >
                   {link.label}

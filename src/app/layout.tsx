@@ -22,12 +22,17 @@ export const metadata: Metadata = {
   },
   description: hero.body,
   metadataBase: new URL(site.url),
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: "/apple-touch-icon.svg",
+  },
   openGraph: {
     title: "Shipfront",
     description: hero.body,
     url: site.url,
     siteName: "Shipfront",
     type: "website",
+    images: [{ url: "/og.svg", alt: "Shipfront" }],
   },
 };
 
