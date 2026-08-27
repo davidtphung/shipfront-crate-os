@@ -12,8 +12,8 @@ export function ServiceModules() {
       <Reveal className="grid items-center gap-8 overflow-hidden rounded-[20px] border border-line bg-paper lg:grid-cols-2">
         <div className="relative min-h-[280px] lg:min-h-[420px]">
           <img
-            src={withBase("/media/shelves.jpg")}
-            alt="Temperature-controlled storage bays with evenly spaced inventory cartons"
+            src={withBase("/media/procurement.jpg")}
+            alt="High angle pick floor of yellow bins and cartons under pallet racking"
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
           />
@@ -73,6 +73,15 @@ export function ServiceModules() {
           />
         </Reveal>
       </div>
+
+      <Reveal className="mt-8 overflow-hidden rounded-[20px] border border-line">
+        <img
+          src={withBase("/media/logistics-usa.jpg")}
+          alt="A row of long hood freight tractors lined up at dusk"
+          className="h-64 w-full object-cover sm:h-80 lg:h-[420px]"
+          loading="lazy"
+        />
+      </Reveal>
 
       <Reveal className="relative mt-8 min-h-[420px] overflow-hidden rounded-[20px]">
         <img
