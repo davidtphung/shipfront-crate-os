@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 64">
+  <rect width="360" height="64" fill="#0D1520"/>
+  <g transform="translate(16 12)" fill="none" stroke="#F15A22" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M7 9 L12 6 L17 9 L17 15 L12 18 L7 15 Z"/>
+    <path d="M7 9 L12 12 L17 9"/>
+    <path d="M12 12 L12 18"/>
+    <path d="M7 15 L12 12 L17 15"/>
+  </g>
+  <text x="64" y="42" fill="#F15A22" font-family="Space Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="28" font-weight="700" letter-spacing="-1">SHIPFRONT</text>
+</svg>
