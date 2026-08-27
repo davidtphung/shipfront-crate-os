@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { Footer } from "@/components/shipfront/Footer";
 import { site, hero } from "@/data/site-copy";
+import { BASE_PATH } from "@/lib/paths";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,8 +24,8 @@ export const metadata: Metadata = {
   description: hero.body,
   metadataBase: new URL(site.url),
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: "/apple-touch-icon.svg",
+    icon: [{ url: `${BASE_PATH}/icon.svg`, type: "image/svg+xml" }],
+    apple: `${BASE_PATH}/apple-touch-icon.svg`,
   },
   openGraph: {
     title: "Shipfront",
@@ -32,7 +33,12 @@ export const metadata: Metadata = {
     url: site.url,
     siteName: "Shipfront",
     type: "website",
-    images: [{ url: "/og.svg", alt: "Shipfront" }],
+    images: [
+      {
+        url: "https://davidtphung.github.io/shipfront-crate-os/og.svg",
+        alt: "Shipfront",
+      },
+    ],
   },
 };
 
