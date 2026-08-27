@@ -1,13 +1,17 @@
 import { cn } from "@/lib/cn";
 
-/** CRATE ink. Not orange. Not #FF6A00. */
-export const CUBE_ACCENT = "#FF2D2D";
+/** Terminal orange. Signal, cube, and CTA. */
+export const CUBE_ACCENT = "#FF6A00";
 
-/** 1F three-face YAW θ=30°. Shared edges stroke once. */
+/** THE SHEET 1A EVEN lockup. Flat sit. No shear, perspective, or rotateY. */
+export const CUBE_VIEWBOX = "0 0 24 26";
+
 export const CUBE_PATHS = [
-  "M6.357 2.150 L16.310 3.690 L13.643 9.436 L3.690 7.897 Z",
-  "M16.310 3.690 L16.310 12.103 L13.643 17.850 L13.643 9.436",
-  "M3.690 7.897 L3.690 16.310 L13.643 17.850",
+  "M7 9 L12 6 L17 9 L12 12 Z",
+  "M7 9 L7 16 L12 19 L17 16 L17 9",
+  "M12 12 L12 19",
+  "M12 6 L12 13 L7 16",
+  "M12 13 L17 16",
 ] as const;
 
 export function CubeMark({
@@ -19,14 +23,14 @@ export function CubeMark({
 }) {
   return (
     <svg
-      viewBox="0 0 20 20"
+      viewBox={CUBE_VIEWBOX}
       fill="none"
       aria-hidden
-      className={cn("h-[30px] w-[30px] shrink-0", className)}
+      className={cn("h-5 w-[18px] shrink-0", className)}
     >
       <g
         stroke={color}
-        strokeWidth="1"
+        strokeWidth="1.25"
         strokeLinecap="square"
         strokeLinejoin="miter"
         strokeMiterlimit={4}

@@ -12,7 +12,7 @@ export function Logo({ invert = false }: { invert?: boolean }) {
       <CubeMark />
       <span
         translate="no"
-        className="font-grotesk text-[24px] font-bold tracking-[-0.04em] text-[#FF2D2D]"
+        className="font-grotesk text-[24px] font-bold tracking-[-0.04em] text-[#FF6A00]"
       >
         SHIPFRONT
       </span>
