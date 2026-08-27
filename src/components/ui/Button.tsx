@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
-import { withBase } from "@/lib/paths";
 
 type Variant = "primary" | "secondary" | "ghost" | "night";
 
 const styles: Record<Variant, string> = {
   primary:
-    "bg-accent text-white shadow-[0_8px_24px_rgba(35,104,246,0.22)] hover:bg-accent-dark",
+    "bg-[#FF6A00] text-black shadow-[0_8px_24px_rgba(255,106,0,0.22)] hover:bg-[#e05e00]",
   secondary:
     "border border-line bg-paper text-ink hover:border-ink/25 hover:bg-surface",
   ghost: "text-ink hover:bg-surface",
@@ -49,7 +48,7 @@ export function Button({
       );
     }
     return (
-      <Link href={withBase(href)} className={cls}>
+      <Link href={href} className={cls}>
         {children}
       </Link>
     );

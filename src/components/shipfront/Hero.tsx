@@ -20,20 +20,20 @@ export function Hero() {
         };
 
   return (
-    <section className="relative canvas-grid min-h-[100dvh] overflow-hidden">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 pt-28 pb-16 sm:px-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-14 lg:pt-32 lg:pb-20">
-        <div>
+    <section className="relative canvas-grid min-h-[100dvh] overflow-x-clip">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 pt-28 pb-16 sm:px-8 lg:grid-cols-[minmax(0,1.28fr)_minmax(0,0.72fr)] lg:gap-10 lg:pt-32 lg:pb-20">
+        <div className="relative z-20 min-w-0">
           <motion.p
             {...enter(0.05)}
             className="text-[12px] font-medium tracking-[0.16em] text-muted uppercase"
           >
             {hero.eyebrow}
           </motion.p>
-          <h1 className="mt-5 text-[40px] leading-[1.05] font-semibold tracking-[-0.05em] text-ink sm:text-[56px] lg:text-[72px]">
-            <motion.span className="block overflow-hidden sm:whitespace-nowrap" {...enter(0.12)}>
+          <h1 className="relative z-20 mt-5 text-[40px] leading-[1.05] font-semibold tracking-[-0.05em] text-ink sm:text-[56px] lg:text-[clamp(52px,5vw,72px)]">
+            <motion.span className="block lg:whitespace-nowrap" {...enter(0.12)}>
               {hero.headlineLine1}
             </motion.span>
-            <motion.span className="mt-1 block overflow-hidden lg:whitespace-nowrap" {...enter(0.22)}>
+            <motion.span className="mt-1 block lg:whitespace-nowrap" {...enter(0.22)}>
               {hero.headlineLine2}
             </motion.span>
           </h1>
@@ -53,7 +53,7 @@ export function Hero() {
             </Button>
           </motion.div>
         </div>
-        <motion.div {...enter(0.28)} className="lg:pt-4">
+        <motion.div {...enter(0.28)} className="relative z-0 min-w-0 lg:pt-4">
           <FulfillmentFlow />
         </motion.div>
       </div>

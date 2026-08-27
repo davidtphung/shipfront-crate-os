@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { Footer } from "@/components/shipfront/Footer";
 import { site, hero } from "@/data/site-copy";
+import { BASE_PATH } from "@/lib/paths";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,6 +16,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["700"],
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Shipfront",
@@ -22,12 +29,22 @@ export const metadata: Metadata = {
   },
   description: hero.body,
   metadataBase: new URL(site.url),
+  icons: {
+    icon: [{ url: `${BASE_PATH}/icon.svg`, type: "image/svg+xml" }],
+    apple: `${BASE_PATH}/apple-touch-icon.svg`,
+  },
   openGraph: {
     title: "Shipfront",
     description: hero.body,
     url: site.url,
     siteName: "Shipfront",
     type: "website",
+    images: [
+      {
+        url: "https://davidtphung.github.io/shipfront-crate-os/og.svg",
+        alt: "Shipfront",
+      },
+    ],
   },
 };
 
@@ -44,7 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas pb-[env(safe-area-inset-bottom)] font-sans text-ink">
         <Providers>
