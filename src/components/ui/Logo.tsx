@@ -5,14 +5,14 @@ export function Logo({ invert = false }: { invert?: boolean }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2",
+        "inline-flex items-center gap-2.5",
         invert ? "text-night-text" : "text-ink",
       )}
     >
       <CubeMark />
       <span
         translate="no"
-        className="text-[15px] font-extrabold tracking-[-0.04em] text-brand sm:text-[17px]"
+        className="font-grotesk text-[24px] font-bold tracking-[-0.04em] text-brand"
       >
         SHIPFRONT
       </span>
