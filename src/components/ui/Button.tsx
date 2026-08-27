@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
-import { withBase } from "@/lib/paths";
 
 type Variant = "primary" | "secondary" | "ghost" | "night";
 
@@ -49,7 +48,7 @@ export function Button({
       );
     }
     return (
-      <Link href={withBase(href)} className={cls}>
+      <Link href={href} className={cls}>
         {children}
       </Link>
     );
