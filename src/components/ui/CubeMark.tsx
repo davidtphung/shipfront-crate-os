@@ -3,12 +3,11 @@ import { cn } from "@/lib/cn";
 /** CRATE ink. Not orange. Not #FF6A00. */
 export const CUBE_ACCENT = "#FF2D2D";
 
-/** YAW θ=30°. Vertical corner leads. Not 1A EVEN. Not 2G YAW. Not a hex. */
+/** 1F three-face YAW θ=30°. Shared edges stroke once. */
 export const CUBE_PATHS = [
-  "M6.357 2.150 L16.310 3.690 L16.310 12.103 L13.643 17.850 L3.690 16.310 L3.690 7.897 Z",
-  "M3.690 7.897 L13.643 9.436",
-  "M13.643 9.436 L13.643 17.850",
-  "M16.310 3.690 L13.643 9.436",
+  "M6.357 2.150 L16.310 3.690 L13.643 9.436 L3.690 7.897 Z",
+  "M16.310 3.690 L16.310 12.103 L13.643 17.850 L13.643 9.436",
+  "M3.690 7.897 L3.690 16.310 L13.643 17.850",
 ] as const;
 
 export function CubeMark({
